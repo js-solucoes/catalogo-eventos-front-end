@@ -1,11 +1,13 @@
 import type { Evento } from "./evento";
 import type { PontoTuristico } from "./pontoTuristico";
 
-export interface Cidade {
+export interface CidadeViewModel {
   id: string;
   nome: string;
   uf: string;
   desc: string;
-  pontos: PontoTuristico[];
+  pontosTuristicos: PontoTuristico[];
   eventos: Evento[];
 }
+
+

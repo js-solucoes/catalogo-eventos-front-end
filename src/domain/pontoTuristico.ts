@@ -1,9 +1,12 @@
+import type { CidadeViewModel } from "./cidade";
+
 export interface PontoTuristico {
-  id: string;
+  id: number;
   nome: string;
   tipo: string;
   horario: string;
   img: string;
   desc: string;
-  destaque?: boolean;
+  cidadeId: number;
+  cidade: CidadeViewModel;
 }

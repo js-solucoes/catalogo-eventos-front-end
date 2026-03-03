@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { SectionHeader, Card } from "../../../shared/ui";
+import { Card, HeroSection, SectionHeader } from "../../../shared/ui";
 import { useEventosStore } from "../../../context/eventosStore";
 import { useCidadesStore } from "../../../context/cidadesStore";
 import { FeaturedCarousel } from "../components/FeaturedCarousel";
@@ -18,29 +18,31 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-10">
-      {/* Hero */}
-      <section className="text-center">
-        <Card className="p-6 sm:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-primary">
-            Celeiro do MS
-          </p>
-          <h1 className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">
-            Descubra eventos e pontos turísticos da nossa região
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-            Uma vitrine digital para promover cultura, lazer e turismo nas cidades que compõem a área
-            de atuação do Celeiro do MS.
-          </p>
-        </Card>
-      </section>
+      <HeroSection
+        kicker="Celeiro do MS"
+        title="Descubra eventos e pontos turísticos da nossa região"
+        subtitle="Uma vitrine digital para promover cultura, lazer e turismo nas cidades que compõem a área de atuação do Celeiro do MS."
+        tone="primary"
+        align="center"
+        actions={[
+          { label: "Ver eventos", href: "/eventos", variant: "primary" },
+          { label: "Ver pontos turísticos", href: "/pontos-turisticos", variant: "secondary" },
+        ]}
+        rightSlot={
+          <div className="rounded-2xl border border-slate-200 bg-white/70 p-4 shadow-sm">
+            <p className="text-xs font-semibold text-slate-700">Destaques</p>
+            <p className="mt-1 text-2xl font-semibold text-slate-900">
+              {(eventos ?? []).filter((e) => e.destaque).length +
+                (pontos ?? []).filter((p) => p.destaque).length}
+            </p>
+            <p className="mt-1 text-xs text-slate-500">itens em evidência</p>
+          </div>
+        }
+      />
 
       {/* Carousel destaques */}
       <section>
-        <SectionHeader
-          kicker="Destaques"
-          tone="warning"
-          description="Eventos e pontos turísticos marcados como destaque."
-        >
+        <SectionHeader kicker="Destaques" tone="warning" description="Eventos e pontos turísticos marcados como destaque.">
           Em evidência agora
         </SectionHeader>
 
@@ -61,7 +63,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dobra: sobre o Celeiro do MS */}
+      {/* Sobre */}
       <section>
         <SectionHeader
           kicker="Quem somos"
@@ -95,7 +97,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dobra: cidades */}
+      {/* Cidades */}
       <section>
         <SectionHeader
           kicker="Área de atuação"

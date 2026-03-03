@@ -1,3 +1,5 @@
+import type { CidadeViewModel } from "./cidade";
+
 export type EventoCategoria =
   | "Show"
   | "Esporte"
@@ -17,5 +19,7 @@ export interface Evento {
   img: string;
   desc: string;
   destaque?: boolean;
+  cidadeId: number;
+  cidade: CidadeViewModel;
 }
 

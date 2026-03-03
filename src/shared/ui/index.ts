@@ -18,3 +18,4 @@ export * from "./SelectField";
 export * from "./TextAreaField";
 export * from "./Tag";
 export * from "./SectionHeader";
+export * from "./HeroSection";
