@@ -125,6 +125,26 @@
       "desc": "Clássicos do rock nacional ao pôr do sol.",
       "cidadeId": 2,
       "destaque": true
+    },
+    {
+      "name": "Murilo",
+      "id": 11
+    },
+    {
+      "name": "Murilo",
+      "id": 12
+    },
+    {
+      "name": "Murilo",
+      "id": 13
+    },
+    {
+      "name": "Murilo",
+      "id": 14
+    },
+    {
+      "name": "Murilo",
+      "id": 15
     }
   ],
   "pontos-turisticos": [

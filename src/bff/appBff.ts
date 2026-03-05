@@ -157,6 +157,7 @@ export async function findEventById(id: number): Promise<Evento> {
 
   if (isApiItemResponse<Evento>(data)) return data.data.item;
   if (isJsonServerItem<Evento>(data)) return data;
+  if(isRecord(data)) return data as unknown as Evento;
 
   throw new Error("Resposta inesperada ao buscar evento por id.");
 }

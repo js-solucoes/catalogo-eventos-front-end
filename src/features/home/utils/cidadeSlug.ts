@@ -1,22 +1,22 @@
-import { cidadesCeleiro } from "../data/cidadesCeleiro";
 import { slugify } from "../../../shared/utils/slugify";
+import { useCidadesPublic } from "../../../context/cidadesStore";
 
 /**
  * Retorna o slug oficial da cidade baseado no nome.
  * Se não encontrar na lista institucional,
  * gera via slugify como fallback.
  */
-export function getCidadeSlugByNome(nome?: string): string | null {
+export async function getCidadeSlugByNome(nome?: string): Promise<string | null> {
   if (!nome) return null;
 
   const normalized = nome.trim().toLowerCase();
 
-  const found = cidadesCeleiro.find(
-    (c) => c.nome.trim().toLowerCase() === normalized
-  );
-
-  if (found) return found.slug;
-
+  // slug pode vir URL-encoded
+  const {state, fetchAll} = useCidadesPublic()
+  await fetchAll();
+  const cidadeSelecionada = state.items.find((c) => c.slug === normalized)
+  if(!cidadeSelecionada || !cidadeSelecionada.slug) return null;
+  if (cidadeSelecionada) return cidadeSelecionada.slug;
   // fallback seguro
   return slugify(nome);
 }

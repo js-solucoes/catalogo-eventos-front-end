@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Card, HeroSection, SectionHeader } from "../../../shared/ui";
 import { CitiesGrid } from "../components/CitiesGrid";
 import { FeaturedCarousel } from "../components/FeaturedCarousel";
-// import { cidadesCeleiro } from "../data/cidadesCeleiro";
 
 import { listCidades, listDestaques } from "../../../bff/appBff";
 import type { Cidade } from "../../../domain";

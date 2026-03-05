@@ -17,6 +17,7 @@ export const initialCidadesState: CidadesState = {
 export type CidadesContextValue = {
   state: CidadesState;
   fetchAll: (query?: CidadesQuery) => Promise<void>;
+  finbBySlug: (slugValue: string) => Promise<void>;
 };
 
 export const CidadesContext = createContext<CidadesContextValue | null>(null);

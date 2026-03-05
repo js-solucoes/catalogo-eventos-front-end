@@ -1,41 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { findEventById } from "../bff/appBff";
-import type { Evento } from "../domain";
-import { Card } from "../shared/ui";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card } from "../shared/ui";
+import { getCidadeSlugByNome } from "../features/home/utils/cidadeSlug";
+import { useEventosPublic } from "../context/eventosStore";
 
 export default function DetailsEventsPage() {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-
-  const [evento, setEvento] = useState<Evento | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchEvento = useCallback(async () => {
-    const numericId = Number(id);
-    if (!Number.isFinite(numericId)) {
-      setError("ID inválido.");
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const item = await findEventById(numericId);
-      setEvento(item);
-    } catch (e) {
-      console.error(e);
-      setError("Não foi possível carregar o evento.");
-    } finally {
-      setLoading(false);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    void fetchEvento();
-  }, [fetchEvento]);
+  const { state: { eventoSelecionado: evento, loading, error, cidade: cidadeDoEvento }, findById } = useEventosPublic()
+  findById(Number(id));
 
   return (
     <section
@@ -68,6 +40,28 @@ export default function DetailsEventsPage() {
           </p>
 
           <p className="text-base text-slate-800">{evento.desc}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+                        <Button variant="secondary" onClick={() => navigate(-1)}>
+                          Voltar
+                        </Button>
+                        <Button
+                          variant="primary"
+                          onClick={() => navigate("/pontos-turisticos")}
+                        >
+                          Ver lista de pontos
+                        </Button>
+                        {cidadeDoEvento ? (
+                          <Button
+                            variant="secondary"
+                            onClick={() => {
+                              const slug = getCidadeSlugByNome(cidadeDoEvento.nome);
+                              if (slug) navigate(`/cidades/${slug}`);
+                            }}
+                          >
+                            Ver cidade
+                          </Button>
+                        ) : null}
+                      </div>
         </>
       ) : (
         <Card className="p-6 text-sm text-slate-600">Evento não encontrado.</Card>

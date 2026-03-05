@@ -6,8 +6,8 @@ import { CitiesSection } from "../componentes/CitiesSection";
 import { EventList } from "../componentes/EventList";
 import { PontoFormModal } from "../componentes/PontoFormModal";
 import { TourismSection } from "../componentes/TourismSection";
-import { useEventosStore } from "../../../context/eventosStore";
-import { useCidadesStore } from "../../../context/cidadesStore";
+import { useEventosPublic } from "../../../context/eventosStore";
+import { useCidadesPublic } from "../../../context/cidadesStore";
 
 export type Tab = "eventos" | "turismo" | "cidades";
 
@@ -18,10 +18,10 @@ const formatDate = (d: string) =>
 
 export const DouradosEventosPage: React.FC = () => {
 
-  const { eventos, createOrUpdateEvento, deleteEvento } =
-    useEventosStore();
-  const { cidades, createOrUpdateCidade, deleteCidade, createOrUpdatePonto, deletePonto } =
-    useCidadesStore();
+  const {  } =
+    useEventosPublic();
+  const {  } =
+    useCidadesPublic();
   
   const EventFormModal = React.lazy(
     () => import("../componentes/EventFormModal"),

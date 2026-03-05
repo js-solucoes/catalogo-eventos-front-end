@@ -1,14 +1,16 @@
 import { createContext, useContext } from "react";
-import type { Evento } from "../domain";
+import type { Cidade, Evento, } from "../domain";
 import type { EventosQuery } from "./eventosContext";
 
 export type EventosState = {
-  items: Evento[];
+  items: Evento[] | [];
   page: number;
   totalPages: number;
   total: number;
   loading: boolean;
   error: string | null;
+  cidade?: Cidade | null;
+  eventoSelecionado?: Evento | null;
 };
 
 export const initialEventosState: EventosState = {
@@ -18,6 +20,7 @@ export const initialEventosState: EventosState = {
   total: 0,
   loading: false,
   error: null,
+  cidade: null
 };
 
 export type EventosContextValue = {
@@ -27,6 +30,8 @@ export type EventosContextValue = {
 
   fetchFirstPage: (query?: Omit<EventosQuery, "page">) => Promise<void>;
   loadMore: () => Promise<void>;
+  findById: (id:number) => Promise<void>;
+  findCidadeEvento: (id:number) => Promise<void>;
 };
 
 export const EventosContext = createContext<EventosContextValue | null>(null);

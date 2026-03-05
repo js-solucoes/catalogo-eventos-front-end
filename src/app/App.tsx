@@ -4,8 +4,10 @@ import {
   createBrowserRouter,
   type RouteObject,
 } from "react-router-dom";
-import { AppRoutes } from "./routes";
+import { CidadesProvider } from "../context/cidadesContext";
+import { EventosProvider } from "../context/eventosContext";
 import { ConfirmProvider } from "../shared/ui/confirm/ConfirmProvider";
+import { AppRoutes } from "./routes";
 
 function toRRRoutes(routes: typeof AppRoutes): RouteObject[] {
   return routes.map((r) => ({
@@ -20,7 +22,11 @@ const router = createBrowserRouter(toRRRoutes(AppRoutes));
 export default function App() {
   return (
     <ConfirmProvider>
+      <CidadesProvider>
+        <EventosProvider>
           <RouterProvider router={router} />
+        </EventosProvider>
+      </CidadesProvider>
     </ConfirmProvider>
   );
 }
