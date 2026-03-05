@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { findPontoById } from "../bff/appBff";
 import type { Cidade, PontoTuristico } from "../domain";
 import { Button, Card, SectionHeader, Tag } from "../shared/ui";
-import { useCidadesStore } from "../context/cidadesStore";
+import { useCidadesPublic } from "../context/cidadesStore";
 import { getCidadeSlugByNome } from "../features/home/utils/cidadeSlug";
 
 const FALLBACK_IMG = "https://picsum.photos/1200/600?blur=1";
@@ -12,7 +12,8 @@ const DetailsPontoPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
-  const { cidades } = useCidadesStore();
+  const { state: cidadesState } = useCidadesPublic();
+  const cidades = cidadesState.items;
 
   const [pontoTuristico, setPontoTuristico] = useState<PontoTuristico | null>(
     null,
@@ -26,7 +27,7 @@ const DetailsPontoPage: React.FC = () => {
     setError(null);
 
     try {
-      const data = await findPontoById(id);
+      const data = await findPontoById(Number(id));
       setPontoTuristico(data);
     } catch (e) {
       console.error(e);
@@ -43,7 +44,7 @@ const DetailsPontoPage: React.FC = () => {
   const cidadeDoPonto = useMemo<Cidade | null>(() => {
     if (!id) return null;
     for (const c of cidades ?? []) {
-      if ((c.pontos ?? []).some((p) => p.id === id)) return c;
+      if ((c.pontosTuristicos ?? []).some((p:PontoTuristico) => p.id === Number(id))) return c;
     }
     return null;
   }, [cidades, id]);

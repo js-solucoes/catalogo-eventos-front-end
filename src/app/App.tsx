@@ -1,8 +1,11 @@
 // src/app/App.tsx
-import { RouterProvider, createBrowserRouter, type RouteObject } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  type RouteObject,
+} from "react-router-dom";
 import { AppRoutes } from "./routes";
-import { EventosProvider } from "../context/eventosContext";
-import { CidadesProvider } from "../context/cidadesContext";
+import { ConfirmProvider } from "../shared/ui/confirm/ConfirmProvider";
 
 function toRRRoutes(routes: typeof AppRoutes): RouteObject[] {
   return routes.map((r) => ({
@@ -16,10 +19,8 @@ const router = createBrowserRouter(toRRRoutes(AppRoutes));
 
 export default function App() {
   return (
-    <EventosProvider>
-      <CidadesProvider>
-        <RouterProvider router={router} />
-      </CidadesProvider>
-    </EventosProvider>
+    <ConfirmProvider>
+          <RouterProvider router={router} />
+    </ConfirmProvider>
   );
 }

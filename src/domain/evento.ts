@@ -1,4 +1,4 @@
-import type { CidadeViewModel } from "./cidade";
+import type { Cidade } from "./cidade";
 
 export type EventoCategoria =
   | "Show"
@@ -9,7 +9,7 @@ export type EventoCategoria =
 
 // src/domain/evento.ts
 export interface Evento {
-  id: string;
+  id: number;
   titulo: string;
   cat: string;
   data: string;
@@ -20,6 +20,6 @@ export interface Evento {
   desc: string;
   destaque?: boolean;
   cidadeId: number;
-  cidade: CidadeViewModel;
+  cidade: Cidade;
 }
 

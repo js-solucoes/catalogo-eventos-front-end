@@ -1,4 +1,4 @@
-import type { CidadeViewModel } from "./cidade";
+import type { Cidade } from "./cidade";
 
 export interface PontoTuristico {
   id: number;
@@ -8,5 +8,6 @@ export interface PontoTuristico {
   img: string;
   desc: string;
   cidadeId: number;
-  cidade: CidadeViewModel;
+  destaque?: boolean;
+  cidade: Cidade;
 }

@@ -1,7 +1,8 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, HeroSection, Button } from "../shared/ui";
-import { cidadesCeleiro } from "../features/home/data/cidadesCeleiro";
+import { findCidadeBySlug } from "../bff/appBff";
+import type { CidadeCeleiro } from "../features/home/data/cidadesCeleiro";
+import { Button, Card, HeroSection } from "../shared/ui";
 
 const FALLBACK_IMG = "https://picsum.photos/1200/600?blur=1";
 
@@ -9,15 +10,58 @@ export default function CityDetailsPage() {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
-  const cidade = useMemo(
-    () => cidadesCeleiro.find((c) => c.slug === slug),
-    [slug]
-  );
+  const [cidade, setCidade] = useState<CidadeCeleiro | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!cidade) {
+  const fetchCidade = useCallback(async (slugValue: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // slug pode vir URL-encoded
+      const item = await findCidadeBySlug(slugValue);
+      const cidadeCeleiro: CidadeCeleiro = {
+          nome: item.nome,
+          uf: item.uf.toString(),
+          slug: item.slug ?? item.nome.toLowerCase().replace(/\s+/g, "-"),
+          image: item.imagem ?? "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=1200&auto=format&fit=crop",
+          descricao: item.desc,
+        }
+      setCidade(cidadeCeleiro);
+    } catch (e) {
+      console.error(e);
+      setCidade(null);
+      setError("Não foi possível carregar a cidade.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!slug) {
+      setCidade(null);
+      setLoading(false);
+      setError("Slug inválido.");
+      return;
+    }
+    void fetchCidade(slug);
+  }, [slug, fetchCidade]);
+
+  if (loading) {
     return (
       <Card className="p-6">
-        <p className="text-sm text-slate-600">Cidade não encontrada.</p>
+        <p className="text-sm text-slate-600">Carregando cidade...</p>
+      </Card>
+    );
+  }
+
+  if (error || !cidade) {
+    return (
+      <Card className="p-6">
+        <p className="text-sm text-slate-600">
+          {error ?? "Cidade não encontrada."}
+        </p>
         <div className="mt-4 flex gap-2">
           <Button variant="secondary" onClick={() => navigate("/")}>
             Ir para Home
@@ -40,14 +84,18 @@ export default function CityDetailsPage() {
         align="left"
         actions={[
           { label: "Ver eventos", href: "/eventos", variant: "primary" },
-          { label: "Ver pontos turísticos", href: "/pontos-turisticos", variant: "secondary" },
+          {
+            label: "Ver pontos turísticos",
+            href: "/pontos-turisticos",
+            variant: "secondary",
+          },
           { label: "Voltar", onClick: () => navigate(-1), variant: "ghost" },
         ]}
       />
 
       <Card className="overflow-hidden">
         <img
-          src={cidade.image}
+          src={cidade.image || FALLBACK_IMG}
           alt={`Foto de ${cidade.nome}`}
           className="h-64 w-full object-cover"
           loading="lazy"
@@ -58,7 +106,9 @@ export default function CityDetailsPage() {
 
         <div className="p-6">
           <p className="text-sm text-slate-600">
-            Aqui você pode colocar conteúdo institucional da cidade, pontos em destaque, agenda local e informações úteis.
+            {cidade.descricao
+              ? cidade.descricao
+              : "Aqui você pode colocar conteúdo institucional da cidade, pontos em destaque, agenda local e informações úteis."}
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
