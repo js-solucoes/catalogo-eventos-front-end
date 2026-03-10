@@ -3,10 +3,10 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { PublicLayout } from "@/shell/public/layouts/PublicLayout";
 import { HomePage } from "@/domains/home-institucional/pages/HomePage";
 import { EventosPage } from "@/domains/catalogo-publico/eventos/pages/EventosPage";
+import { EventoDetailsPage } from "@/domains/catalogo-publico/eventos/pages/EventoDetailsPage";
 import { PontosTuristicosPage } from "@/domains/catalogo-publico/pontos/pages/PontosTuristicosPage";
 import { PontoTuristicoDetailsPage } from "@/domains/catalogo-publico/pontos/pages/PontoTuristicoDetailsPage";
 import { CityDetailsPage } from "@/domains/cidades-institucional/pages/CityDetailsPage";
-import { EventoDetailsPage } from "@/domains/catalogo-publico/eventos/pages/EventoDetailsPage";
 
 export function AppRoutes(): ReactElement | null {
   return useRoutes([

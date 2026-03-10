@@ -1,11 +1,13 @@
-import { Button, Card } from "@/shared/ui";
 import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { Button, Card } from "@/design-system/ui";
 import type { ICeleiroCidade } from "../data/celeiroCidades";
 
 export interface ICityCardProps {
   cidade: ICeleiroCidade;
 }
+
+const FALLBACK_CITY_IMG = "/images/fallbacks/cidade-card.jpg";
 
 export function CityCard({ cidade }: ICityCardProps): ReactElement {
   return (
@@ -14,6 +16,10 @@ export function CityCard({ cidade }: ICityCardProps): ReactElement {
         src={cidade.imageUrl}
         alt={cidade.nome}
         className="h-52 w-full object-cover"
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.src = FALLBACK_CITY_IMG;
+        }}
       />
 
       <div className="space-y-4 p-5">

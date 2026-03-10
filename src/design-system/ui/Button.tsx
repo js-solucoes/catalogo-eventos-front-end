@@ -21,7 +21,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   accent:
     "bg-[var(--color-accent)] text-zinc-900 hover:opacity-90 focus-visible:outline-[var(--color-accent)]",
   ghost:
-    "border border-zinc-300 bg-white text-zinc-800 hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)] focus-visible:outline-[var(--color-primary)]",
+    "border border-white/50 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 focus-visible:outline-white",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

@@ -1,12 +1,86 @@
-import type { ReactElement } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Section } from "@/shared/ui";
-import { HOME_HIGHLIGHTS } from "../data/homeHighlights";
+import { useEffect, useMemo, useState, type ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Card } from "@/design-system/ui";
+import { HOME_HIGHLIGHTS, type IHomeHighlight } from "../data/homeHighlights";
 
-export function HomeHeroCarousel(): ReactElement {
+export interface IHomeHeroItem {
+  id: string;
+  kind: "evento" | "ponto-turistico";
+  title: string;
+  subtitle?: string;
+  image: string;
+  href: string;
+}
+
+const FALLBACK_IMG = "/images/fallbacks/celeiro-highlight.jpg";
+const AUTO_PLAY_INTERVAL_MS = 4500;
+
+function getTagLabel(kind: IHomeHeroItem["kind"]): string {
+  return kind === "evento"
+    ? "Evento em destaque"
+    : "Ponto turístico em destaque";
+}
+
+function getTagClassName(kind: IHomeHeroItem["kind"]): string {
+  return kind === "evento"
+    ? "bg-[var(--color-accent)] text-zinc-900"
+    : "bg-white/90 text-zinc-900";
+}
+
+export function HomeHeroCarousel(): ReactElement | null {
+  const navigate = useNavigate();
+  const [index, setIndex] = useState<number>(0);
+
+  const items: IHomeHeroItem[] = useMemo(
+    () =>
+      HOME_HIGHLIGHTS.map((item: IHomeHighlight) => ({
+        id: item.id,
+        kind: item.kind,
+        title: item.titulo,
+        subtitle: `${item.cidadeNome} • ${item.descricao}`,
+        image: item.imageUrl,
+        href: item.href,
+      })),
+    []
+  );
+
+  useEffect(() => {
+    if (items.length <= 1) {
+      return;
+    }
+
+    const timerId: number = window.setInterval(() => {
+      setIndex((currentIndex: number) => (currentIndex + 1) % items.length);
+    }, AUTO_PLAY_INTERVAL_MS);
+
+    return () => {
+      window.clearInterval(timerId);
+    };
+  }, [items.length]);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+
+    if (index > items.length - 1) {
+      setIndex(0);
+    }
+  }, [index, items.length]);
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  const currentItem: IHomeHeroItem = items[index];
+
+  function handleNext(): void {
+    setIndex((currentIndex: number) => (currentIndex + 1) % items.length);
+  }
+
   return (
-    <Section spacing="xl" className="pt-8 md:pt-12">
-      <Container>
+    <section className="pt-8 md:pt-12">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 space-y-3">
           <span className="inline-flex rounded-full bg-[var(--color-bg-light)] px-3 py-1 text-sm font-medium text-[var(--color-secondary)]">
             Celeiro do MS
@@ -23,47 +97,91 @@ export function HomeHeroCarousel(): ReactElement {
           </p>
         </div>
 
-        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2">
-          {HOME_HIGHLIGHTS.map((item) => (
-            <article
-              key={item.id}
-              className="group min-w-[85%] snap-start overflow-hidden rounded-[24px] border border-black/5 bg-white shadow-soft md:min-w-[48%] xl:min-w-[32%]"
+        <Card className="overflow-hidden p-0">
+          <div className="relative">
+            <img
+              src={currentItem.image || FALLBACK_IMG}
+              alt={currentItem.title}
+              className="h-64 w-full object-cover sm:h-80 lg:h-[420px]"
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.src = FALLBACK_IMG;
+              }}
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/30 to-transparent" />
+
+            <div
+              aria-live="polite"
+              className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-8"
             >
-              <img
-                src={item.imageUrl}
-                alt={item.titulo}
-                className="h-72 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-              />
+              <div className="flex items-center gap-2">
+                <span
+                  className={[
+                    "inline-flex rounded-full px-3 py-1 text-xs font-semibold",
+                    getTagClassName(currentItem.kind),
+                  ].join(" ")}
+                >
+                  {getTagLabel(currentItem.kind)}
+                </span>
 
-              <div className="space-y-4 p-6">
-                <div className="space-y-1">
-                  <span className="inline-flex rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-                    {item.label}
-                  </span>
-
-                  <p className="text-sm font-medium text-[var(--color-secondary)]">
-                    {item.cidadeNome}
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <h2 className="text-2xl font-semibold text-zinc-900">
-                    {item.titulo}
-                  </h2>
-
-                  <p className="text-sm leading-6 text-zinc-600">
-                    {item.descricao}
-                  </p>
-                </div>
-
-                <Link to={item.href}>
-                  <Button variant="secondary">Explorar destaque</Button>
-                </Link>
+                <span className="text-xs text-white/80">
+                  {index + 1}/{items.length}
+                </span>
               </div>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </Section>
+
+              <h2 className="mt-3 max-w-3xl text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
+                {currentItem.title}
+              </h2>
+
+              {currentItem.subtitle ? (
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-white/85 sm:text-base">
+                  {currentItem.subtitle}
+                </p>
+              ) : null}
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button
+                  variant="primary"
+                  onClick={() => navigate(currentItem.href)}
+                >
+                  Ver detalhes
+                </Button>
+
+                {items.length > 1 ? (
+                  <Button variant="ghost" onClick={handleNext}>
+                    Próximo
+                  </Button>
+                ) : null}
+              </div>
+
+              {items.length > 1 ? (
+                <div className="mt-5 flex gap-2">
+                  {items.map((item: IHomeHeroItem, itemIndex: number) => {
+                    const isActive: boolean = itemIndex === index;
+
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        aria-label={`Ir para destaque ${itemIndex + 1}`}
+                        aria-current={isActive ? "true" : undefined}
+                        onClick={() => setIndex(itemIndex)}
+                        className={[
+                          "h-2.5 rounded-full transition",
+                          isActive
+                            ? "w-8 bg-[var(--color-accent)]"
+                            : "w-2.5 bg-white/40 hover:bg-white/70",
+                        ].join(" ")}
+                      />
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
   );
 }

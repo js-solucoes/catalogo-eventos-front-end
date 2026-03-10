@@ -1,13 +1,12 @@
-import { useCidadeAtual } from "@/domains/cidade-atual/useCidadeAtual";
-import { useCidadesPublicas } from "@/domains/cidade-atual/useCidadesPublicas";
-import type { ICidade } from "@/entities/cidade/cidade.types";
 import type { ChangeEvent, ReactElement } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useCidadeAtual } from "@/domains/cidade-atual/useCidadeAtual";
+import { useCidadesPublicas } from "@/domains/cidade-atual/useCidadesPublicas";
 
 function getNavLinkClassName(isActive: boolean): string {
   return isActive
     ? "text-[var(--color-secondary)]"
-    : "hover:text-[var(--color-secondary)]";
+    : "text-zinc-700 hover:text-[var(--color-secondary)]";
 }
 
 export function TopNav(): ReactElement {
@@ -32,7 +31,7 @@ export function TopNav(): ReactElement {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-zinc-700 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             <NavLink
               to="/"
               className={({ isActive }: { isActive: boolean }) =>
@@ -85,7 +84,7 @@ export function TopNav(): ReactElement {
             onChange={handleCidadeChange}
             className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 outline-none transition focus:border-[var(--color-primary)]"
           >
-            {cidades.map((item: ICidade) => (
+            {cidades.map((item) => (
               <option key={item.id} value={item.slug}>
                 {item.nome}
               </option>
@@ -93,7 +92,7 @@ export function TopNav(): ReactElement {
           </select>
         </div>
 
-        <nav className="flex items-center gap-4 text-sm font-medium text-zinc-700 md:hidden">
+        <nav className="flex items-center gap-4 md:hidden">
           <NavLink
             to="/"
             className={({ isActive }: { isActive: boolean }) =>
