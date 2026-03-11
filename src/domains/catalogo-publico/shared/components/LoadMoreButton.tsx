@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui";
+import { Button } from "@/design-system/ui";
 import type { ReactElement } from "react";
 
 export interface ILoadMoreButtonProps {
