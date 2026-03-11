@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import type { IPontoTuristico } from "@/entities/ponto-turistico/pontoTuristico.types";
-import { Button, Card, Container, Section } from "@/shared/ui";
+import { Button, Card, Container, Section, SectionHeader } from "@/design-system/ui";
 import { tourismApiClient } from "@/services/tourism-api/client";
 
 interface IPontoRouteParams {
@@ -62,9 +62,7 @@ export function PontoTuristicoDetailsPage(): ReactElement {
   if (isLoading) {
     return (
       <Section spacing="xl">
-        <Container>
-          <p className="text-sm text-zinc-600">Carregando ponto turístico...</p>
-        </Container>
+        <p className="text-sm text-zinc-600">Carregando ponto turístico...</p>
       </Section>
     );
   }
@@ -132,12 +130,14 @@ export function PontoTuristicoDetailsPage(): ReactElement {
         </Container>
       </section>
 
-      <Section
-        title="Informações do atrativo"
-        description="Estrutura inicial preparada para receber conteúdo mais rico da API real."
-        spacing="xl"
-      >
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <Section spacing="xl">
+        <SectionHeader
+          description="Estrutura inicial preparada para receber conteúdo mais rico da API real."
+        >
+          Informações do atrativo
+        </SectionHeader>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Card>
             <h2 className="text-lg font-semibold text-zinc-900">Categoria</h2>
             <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -153,7 +153,9 @@ export function PontoTuristicoDetailsPage(): ReactElement {
           </Card>
 
           <Card>
-            <h2 className="text-lg font-semibold text-zinc-900">Funcionamento</h2>
+            <h2 className="text-lg font-semibold text-zinc-900">
+              Funcionamento
+            </h2>
             <p className="mt-3 text-sm leading-6 text-zinc-600">
               {ponto.horarioFuncionamento ?? "Não informado"}
             </p>

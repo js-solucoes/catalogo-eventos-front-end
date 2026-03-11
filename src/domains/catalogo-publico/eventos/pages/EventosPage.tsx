@@ -1,3 +1,7 @@
+import { useMemo, useState, type ReactElement } from "react";
+import { useCidadeAtual } from "@/domains/cidade-atual/useCidadeAtual";
+import { useSyncCidadeFromUrl } from "@/domains/cidade-atual/useSyncCidadeFromUrl";
+import { Section, SectionHeader } from "@/design-system/ui";
 import { CatalogFilters } from "@/domains/catalogo-publico/shared/components/CatalogFilters";
 import { CatalogGrid } from "@/domains/catalogo-publico/shared/components/CatalogGrid";
 import { CatalogGridSkeleton } from "@/domains/catalogo-publico/shared/components/CatalogGridSkeleton";
@@ -6,11 +10,8 @@ import { LoadMoreButton } from "@/domains/catalogo-publico/shared/components/Loa
 import { useCatalogoPublicoPaginado } from "@/domains/catalogo-publico/shared/hooks/useCatalogoPublicoPaginado";
 import type { ICatalogoFiltersValue } from "@/domains/catalogo-publico/shared/model/catalogo.filters";
 import type { ICatalogoQuery } from "@/domains/catalogo-publico/shared/model/catalogo.types";
-import { useSyncCidadeFromUrl } from "@/domains/cidade-atual/useSyncCidadeFromUrl";
-import { useMemo, useState, type ReactElement } from "react";
 import { fetchEventosCatalogo } from "../config/eventosCatalogConfig";
 import { eventosFiltersConfig } from "../config/eventosFiltersConfig";
-import { useCidadeAtual } from "@/domains/cidade-atual/useCidadeAtual";
 
 export function EventosPage(): ReactElement {
   useSyncCidadeFromUrl();
@@ -46,50 +47,51 @@ export function EventosPage(): ReactElement {
     !isInitialLoading && !error && data.items.length === 0;
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-10">
-      <header className="mb-8 space-y-2">
-        <h1 className="text-3xl font-bold text-zinc-900">
-          Eventos em {cidade.nome}
-        </h1>
-        <p className="text-zinc-600">
-          Explore a agenda da cidade selecionada.
-        </p>
-      </header>
+    <Section spacing="xl">
+      <SectionHeader
+        description="Explore a agenda da cidade selecionada."
+      >
+        Eventos em {cidade.nome}
+      </SectionHeader>
 
-      <CatalogFilters
-        value={filters}
-        onChange={setFilters}
-        config={eventosFiltersConfig}
-      />
-
-      {isInitialLoading ? <CatalogGridSkeleton count={6} /> : null}
-
-      {error ? (
-        <EmptyState
-          title="Erro ao carregar eventos"
-          description={error}
+      <div className="mt-8">
+        <CatalogFilters
+          value={filters}
+          onChange={setFilters}
+          config={eventosFiltersConfig}
         />
-      ) : null}
+      </div>
 
-      {isEmpty ? (
-        <EmptyState
-          title="Nenhum evento encontrado"
-          description="Tente mudar a busca, categoria ou cidade selecionada."
-        />
-      ) : null}
+      <div className="mt-8">
+        {isInitialLoading ? <CatalogGridSkeleton count={6} /> : null}
 
-      {!isInitialLoading && !error && data.items.length > 0 ? (
-        <>
-          <CatalogGrid items={data.items} />
+        {error ? (
+          <EmptyState
+            title="Erro ao carregar eventos"
+            description={error}
+          />
+        ) : null}
 
-          {data.hasMore ? (
-            <LoadMoreButton
-              isLoading={isLoadingMore}
-              onClick={loadMore}
-            />
-          ) : null}
-        </>
-      ) : null}
-    </section>
+        {isEmpty ? (
+          <EmptyState
+            title="Nenhum evento encontrado"
+            description="Tente mudar a busca, categoria ou cidade selecionada."
+          />
+        ) : null}
+
+        {!isInitialLoading && !error && data.items.length > 0 ? (
+          <>
+            <CatalogGrid items={data.items} />
+
+            {data.hasMore ? (
+              <LoadMoreButton
+                isLoading={isLoadingMore}
+                onClick={loadMore}
+              />
+            ) : null}
+          </>
+        ) : null}
+      </div>
+    </Section>
   );
 }

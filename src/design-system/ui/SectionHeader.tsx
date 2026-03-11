@@ -28,8 +28,8 @@ export function SectionHeader({
 }: ISectionHeaderProps): ReactElement {
   const alignClass: string =
     align === "center"
-      ? "text-center items-center"
-      : "text-left items-start";
+      ? "items-center text-center"
+      : "items-start text-left";
 
   return (
     <header className={cn("flex flex-col gap-2", alignClass, className)}>

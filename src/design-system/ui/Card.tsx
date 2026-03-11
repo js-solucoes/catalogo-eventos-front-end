@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactElement, ReactNode } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "@/design-system/utils/cn";
 
 export type CardPadding = "none" | "sm" | "md" | "lg";
 

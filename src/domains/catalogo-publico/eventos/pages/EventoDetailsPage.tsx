@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import type { IEvento } from "@/entities/evento/evento.types";
-import { Button, Card, Container, Section } from "@/shared/ui";
+import { Button, Card, Container, Section, SectionHeader } from "@/design-system/ui";
 import { tourismApiClient } from "@/services/tourism-api/client";
 
 interface IEventoRouteParams {
@@ -61,9 +61,7 @@ export function EventoDetailsPage(): ReactElement {
   if (isLoading) {
     return (
       <Section spacing="xl">
-        <Container>
-          <p className="text-sm text-zinc-600">Carregando evento...</p>
-        </Container>
+        <p className="text-sm text-zinc-600">Carregando evento...</p>
       </Section>
     );
   }
@@ -129,12 +127,14 @@ export function EventoDetailsPage(): ReactElement {
         </Container>
       </section>
 
-      <Section
-        title="Informações do evento"
-        description="Estrutura inicial preparada para receber dados mais completos da API real."
-        spacing="xl"
-      >
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <Section spacing="xl">
+        <SectionHeader
+          description="Estrutura inicial preparada para receber dados mais completos da API real."
+        >
+          Informações do evento
+        </SectionHeader>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Card>
             <h2 className="text-lg font-semibold text-zinc-900">Categoria</h2>
             <p className="mt-3 text-sm leading-6 text-zinc-600">

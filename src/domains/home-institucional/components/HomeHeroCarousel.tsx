@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card } from "@/design-system/ui";
+import { Button, Card, Container } from "@/design-system/ui";
 import { HOME_HIGHLIGHTS, type IHomeHighlight } from "../data/homeHighlights";
 
 const FALLBACK_IMG = "/images/fallbacks/celeiro-highlight.jpg";
@@ -59,7 +59,7 @@ export function HomeHeroCarousel(): ReactElement | null {
 
   return (
     <section className="pt-8 md:pt-12">
-      <div className="mx-auto w-full max-w-7xl px-4">
+      <Container>
         <div className="mb-6 space-y-3">
           <span className="inline-flex rounded-full bg-[var(--color-bg-light)] px-3 py-1 text-sm font-medium text-[var(--color-secondary)]">
             Celeiro do MS
@@ -168,7 +168,7 @@ export function HomeHeroCarousel(): ReactElement | null {
             </div>
           </div>
         </Card>
-      </div>
+      </Container>
     </section>
   );
 }

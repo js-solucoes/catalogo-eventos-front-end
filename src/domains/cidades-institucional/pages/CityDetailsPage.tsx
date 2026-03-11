@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { Button, Card, Container, Section } from "@/shared/ui";
+import { Button, Card, Container, Section, SectionHeader } from "@/design-system/ui";
 import {
   findCeleiroCidadeBySlug,
   type ICeleiroCidade,
@@ -73,12 +73,14 @@ export function CityDetailsPage(): ReactElement {
         </Container>
       </section>
 
-      <Section
-        title={`Conheça ${cidade.nome}`}
-        description="Uma visão institucional inicial da cidade dentro do portal Celeiro do MS."
-        spacing="xl"
-      >
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <Section spacing="xl">
+        <SectionHeader
+          description="Uma visão institucional inicial da cidade dentro do portal Celeiro do MS."
+        >
+          Conheça {cidade.nome}
+        </SectionHeader>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Card>
             <h2 className="text-lg font-semibold text-zinc-900">
               Identidade local
@@ -111,21 +113,25 @@ export function CityDetailsPage(): ReactElement {
         </div>
       </Section>
 
-      <Section
-        title="Próximos conteúdos desta cidade"
-        description="Esta estrutura já está pronta para receber dados reais quando sua API estiver consolidada."
-        spacing="lg"
-      >
-        <Card>
-          <ul className="space-y-3 text-sm leading-6 text-zinc-700">
-            <li>• Banner institucional da cidade</li>
-            <li>• Seção “sobre a cidade” com conteúdo editorial</li>
-            <li>• Destaques de eventos</li>
-            <li>• Destaques de pontos turísticos</li>
-            <li>• Galeria de imagens</li>
-            <li>• Informações de contato e redes institucionais</li>
-          </ul>
-        </Card>
+      <Section spacing="lg">
+        <SectionHeader
+          description="Esta estrutura já está pronta para receber dados reais quando sua API estiver consolidada."
+        >
+          Próximos conteúdos desta cidade
+        </SectionHeader>
+
+        <div className="mt-8">
+          <Card>
+            <ul className="space-y-3 text-sm leading-6 text-zinc-700">
+              <li>• Banner institucional da cidade</li>
+              <li>• Seção “sobre a cidade” com conteúdo editorial</li>
+              <li>• Destaques de eventos</li>
+              <li>• Destaques de pontos turísticos</li>
+              <li>• Galeria de imagens</li>
+              <li>• Informações de contato e redes institucionais</li>
+            </ul>
+          </Card>
+        </div>
       </Section>
     </div>
   );

@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "@/design-system/utils/cn";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "accent";
 export type ButtonSize = "sm" | "md" | "lg";

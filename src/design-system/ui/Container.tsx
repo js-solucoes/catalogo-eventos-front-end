@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactElement, ReactNode } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "@/design-system/utils/cn";
 
 export type ContainerSize = "md" | "lg" | "xl";
 
@@ -22,11 +22,7 @@ export function Container({
 }: IContainerProps): ReactElement {
   return (
     <div
-      className={cn(
-        "mx-auto w-full px-4",
-        sizeClasses[size],
-        className
-      )}
+      className={cn("mx-auto w-full px-4", sizeClasses[size], className)}
       {...rest}
     >
       {children}

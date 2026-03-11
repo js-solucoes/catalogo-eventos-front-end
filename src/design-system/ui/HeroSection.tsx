@@ -68,7 +68,7 @@ export function HeroSection({
     <section className={className} aria-label="Seção principal">
       <Card
         className={[
-          "relative overflow-hidden p-6 sm:p-10 ring-1",
+          "relative overflow-hidden p-6 ring-1 sm:p-10",
           styles.ring,
         ].join(" ")}
       >
