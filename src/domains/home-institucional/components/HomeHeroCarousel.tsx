@@ -82,19 +82,23 @@ export function HomeHeroCarousel(): ReactElement | null {
               const isActive: boolean = itemIndex === index;
 
               return (
-                <img
-                  key={item.id}
-                  src={item.imageUrl || FALLBACK_IMG}
-                  alt={item.titulo}
-                  className={[
-                    "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
-                    isActive ? "opacity-100" : "pointer-events-none opacity-0",
-                  ].join(" ")}
-                  loading={itemIndex === 0 ? "eager" : "lazy"}
-                  onError={(event) => {
-                    event.currentTarget.src = FALLBACK_IMG;
-                  }}
-                />
+                <>
+                  <img
+                    key={item.id}
+                    src={item.imageUrl || FALLBACK_IMG}
+                    alt={item.titulo}
+                    className={[
+                      "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
+                      isActive
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0",
+                    ].join(" ")}
+                    loading={itemIndex === 0 ? "eager" : "lazy"}
+                    onError={(event) => {
+                      event.currentTarget.src = FALLBACK_IMG;
+                    }}
+                  />
+                </>
               );
             })}
 
@@ -110,20 +114,31 @@ export function HomeHeroCarousel(): ReactElement | null {
                     "inline-flex rounded-full px-3 py-1 text-xs font-semibold",
                     getTagClassName(currentItem.kind),
                   ].join(" ")}
+                  aria-label={getTagLabel(currentItem.kind)}
                 >
                   {getTagLabel(currentItem.kind)}
                 </span>
 
-                <span className="text-xs text-white/80">
+                <span
+                  className="text-xs text-white/80"
+                  aria-label={`Destaque ${index + 1} de ${HOME_HIGHLIGHTS.length}`}
+                  data-testid="carousel-counter"
+                >
                   {index + 1}/{HOME_HIGHLIGHTS.length}
                 </span>
               </div>
 
-              <h2 className="mt-3 max-w-3xl text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
+              <h2
+                className="mt-3 max-w-3xl text-2xl font-semibold text-white sm:text-3xl lg:text-4xl"
+                data-testid="carousel-title"
+              >
                 {currentItem.titulo}
               </h2>
 
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-white/85 sm:text-base">
+              <p
+                className="mt-2 max-w-2xl text-sm leading-6 text-white/85 sm:text-base"
+                data-testid="carousel-subtitle"
+              >
                 {currentItem.cidadeNome} • {currentItem.descricao}
               </p>
 
@@ -143,26 +158,32 @@ export function HomeHeroCarousel(): ReactElement | null {
               </div>
 
               {HOME_HIGHLIGHTS.length > 1 ? (
-                <div className="mt-5 flex gap-2">
-                  {HOME_HIGHLIGHTS.map((item: IHomeHighlight, itemIndex: number) => {
-                    const isActive: boolean = itemIndex === index;
+                <div
+                  className="mt-5 flex gap-2"
+                  aria-label="Indicadores do carrossel"
+                >
+                  {HOME_HIGHLIGHTS.map(
+                    (item: IHomeHighlight, itemIndex: number) => {
+                      const isActive: boolean = itemIndex === index;
 
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        aria-label={`Ir para destaque ${itemIndex + 1}`}
-                        aria-current={isActive ? "true" : undefined}
-                        onClick={() => setIndex(itemIndex)}
-                        className={[
-                          "h-2.5 rounded-full transition",
-                          isActive
-                            ? "w-8 bg-[var(--color-accent)]"
-                            : "w-2.5 bg-white/40 hover:bg-white/70",
-                        ].join(" ")}
-                      />
-                    );
-                  })}
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          aria-label={`Ir para destaque ${itemIndex + 1}`}
+                          aria-current={isActive ? "true" : undefined}
+                          data-testid={`carousel-dot-${itemIndex + 1}`}
+                          onClick={() => setIndex(itemIndex)}
+                          className={[
+                            "h-2.5 rounded-full transition",
+                            isActive
+                              ? "w-8 bg-[var(--color-accent)]"
+                              : "w-2.5 bg-white/40 hover:bg-white/70",
+                          ].join(" ")}
+                        />
+                      );
+                    },
+                  )}
                 </div>
               ) : null}
             </div>

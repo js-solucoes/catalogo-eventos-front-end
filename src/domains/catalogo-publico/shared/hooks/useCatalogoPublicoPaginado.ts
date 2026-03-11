@@ -37,6 +37,9 @@ export function useCatalogoPublicoPaginado({
   fetcher,
   initialPage = 1,
 }: IUseCatalogoPublicoPaginadoParams): IUseCatalogoPublicoPaginadoResult {
+  const cidade: string = baseQuery.cidade;
+  const busca: string | undefined = baseQuery.busca;
+  const categoria: string | undefined = baseQuery.categoria;
   const safeLimit: number = baseQuery.limit > 0 ? baseQuery.limit : DEFAULT_LIMIT;
 
   const [data, setData] = useState<ICatalogoPaginatedState>(
@@ -48,10 +51,12 @@ export function useCatalogoPublicoPaginado({
 
   const stableBaseQuery = useMemo(
     () => ({
-      ...baseQuery,
+      cidade,
+      busca,
+      categoria,
       limit: safeLimit,
     }),
-    [baseQuery, safeLimit]
+    [cidade, busca, categoria, safeLimit]
   );
 
   const executeFetch = useCallback(
@@ -106,7 +111,7 @@ export function useCatalogoPublicoPaginado({
       setError(null);
       await executeFetch(data.page + 1, true);
     } catch {
-      setError("Não foi possível carregar mais itens.");
+      setError("Não foi possível carregar mais os dados.");
     } finally {
       setIsLoadingMore(false);
     }

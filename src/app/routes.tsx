@@ -7,6 +7,7 @@ import { EventoDetailsPage } from "@/domains/catalogo-publico/eventos/pages/Even
 import { PontosTuristicosPage } from "@/domains/catalogo-publico/pontos/pages/PontosTuristicosPage";
 import { PontoTuristicoDetailsPage } from "@/domains/catalogo-publico/pontos/pages/PontoTuristicoDetailsPage";
 import { CityDetailsPage } from "@/domains/cidades-institucional/pages/CityDetailsPage";
+import { AboutPage } from "@/domains/institucional/pages/AboutPage";
 
 export function AppRoutes(): ReactElement | null {
   return useRoutes([
@@ -37,6 +38,10 @@ export function AppRoutes(): ReactElement | null {
         {
           path: "cidades/:slug",
           element: <CityDetailsPage />,
+        },
+        {
+          path: "sobre",
+          element: <AboutPage />,
         },
       ],
     },
