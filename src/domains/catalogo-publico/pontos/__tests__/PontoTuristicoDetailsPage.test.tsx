@@ -38,7 +38,7 @@ describe("PontoTuristicoDetailsPage", () => {
       () => new Promise(() => undefined)
     );
 
-    renderWithRoute("/pontos-turisticos/pto-1");
+    renderWithRoute("/pontos-turisticos/1");
 
     expect(
       screen.getByText("Carregando ponto turístico...")
@@ -47,8 +47,8 @@ describe("PontoTuristicoDetailsPage", () => {
 
   it("deve renderizar os dados do ponto turístico quando encontrado", async () => {
     vi.mocked(publicApiClient.getPublishedTouristPointById).mockResolvedValue({
-      id: "pto-1",
-      cityId: "city-dourados",
+      id: 1,
+      cityId: 1,
       citySlug: "dourados",
       name: "Parque Antenor Martins",
       description: "Área verde com lago, pista de caminhada e espaço de lazer.",
@@ -62,7 +62,7 @@ describe("PontoTuristicoDetailsPage", () => {
       updatedAt: new Date().toISOString(),
     });
 
-    renderWithRoute("/pontos-turisticos/pto-1");
+    renderWithRoute("/pontos-turisticos/1");
 
     expect(
       await screen.findByText("Parque Antenor Martins")
@@ -82,7 +82,7 @@ describe("PontoTuristicoDetailsPage", () => {
   it("deve redirecionar para /pontos-turisticos quando o ponto não existir", async () => {
     vi.mocked(publicApiClient.getPublishedTouristPointById).mockResolvedValue(null);
 
-    renderWithRoute("/pontos-turisticos/ponto-inexistente");
+    renderWithRoute("/pontos-turisticos/999999");
 
     await waitFor(() => {
       expect(screen.getByText("Pontos fallback")).toBeInTheDocument();

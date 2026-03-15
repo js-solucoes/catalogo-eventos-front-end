@@ -32,15 +32,15 @@ describe("EventoDetailsPage", () => {
       () => new Promise(() => undefined)
     );
 
-    renderWithRoute("/eventos/evt-1");
+    renderWithRoute("/eventos/1");
 
     expect(screen.getByText("Carregando evento...")).toBeInTheDocument();
   });
 
   it("deve renderizar os dados do evento quando encontrado", async () => {
     vi.mocked(publicApiClient.getPublishedEventById).mockResolvedValue({
-      id: "evt-1",
-      cityId: "city-dourados",
+      id: 1,
+      cityId: 1,
       citySlug: "dourados",
       name: "Festival Gastronômico de Dourados",
       description: "Sabores regionais, música e experiências culturais.",
@@ -56,7 +56,7 @@ describe("EventoDetailsPage", () => {
       updatedAt: new Date().toISOString(),
     });
 
-    renderWithRoute("/eventos/evt-1");
+    renderWithRoute("/eventos/1");
 
     expect(
       await screen.findByText("Festival Gastronômico de Dourados")
