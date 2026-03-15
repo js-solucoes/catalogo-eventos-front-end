@@ -1,6 +1,6 @@
-import type { ICidade } from "@/entities/cidade/cidade.types";
-import type { IEvento } from "@/entities/evento/evento.types";
-import type { IPontoTuristico } from "@/entities/ponto-turistico/pontoTuristico.types";
+import { ICity } from "@/entities/city/city.types";
+import { IEvent } from "@/entities/event/event.types";
+import { ITouristPoint } from "@/entities/tourist-point/touristPoint.types";
 
 export interface IListByCidadeParams {
   cidade: string;
@@ -18,13 +18,13 @@ export interface ITourismApiListResponse<TItem> {
 }
 
 export interface ITourismApiClient {
-  listCidades: () => Promise<ICidade[]>;
+  listCidades: () => Promise<ICity[]>;
   listEventosByCidade: (
     params: IListByCidadeParams
-  ) => Promise<ITourismApiListResponse<IEvento>>;
+  ) => Promise<ITourismApiListResponse<IEvent>>;
   listPontosByCidade: (
     params: IListByCidadeParams
-  ) => Promise<ITourismApiListResponse<IPontoTuristico>>;
-  getEventoById: (id: string) => Promise<IEvento | null>;
-  getPontoById: (id: string) => Promise<IPontoTuristico | null>;
+  ) => Promise<ITourismApiListResponse<ITouristPoint>>;
+  getEventoById: (id: string) => Promise<IEvent | null>;
+  getPontoById: (id: string) => Promise<ITouristPoint | null>;
 }

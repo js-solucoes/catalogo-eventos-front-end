@@ -1,7 +1,3 @@
-import type { ICidade } from "@/entities/cidade/cidade.types";
-import type { IEvento } from "@/entities/evento/evento.types";
-import type { IPontoTuristico } from "@/entities/ponto-turistico/pontoTuristico.types";
-import { toCidadeEntity } from "./adapters/cidade.adapters";
 import { toEventoEntity } from "./adapters/evento.adapters";
 import { toPontoTuristicoEntity } from "./adapters/pontoTuristico.adapters";
 import { cidadesMock, eventosMock, mockDelay, pontosMock } from "./mock-data";
@@ -10,6 +6,11 @@ import type {
   ITourismApiClient,
   ITourismApiListResponse,
 } from "./tourismApi.types";
+import { mapEventoToEvent } from "@/entities/helpers/mapEventoToEvent";
+import { IEvent } from "@/entities/event/event.types";
+import { mapPontoTuristicoToTouristPoint } from "@/entities/helpers/mapPontoTuristicoToTouristPoint";
+import { ITouristPoint } from "@/entities/tourist-point/touristPoint.types";
+import { ICity } from "@/entities/city/city.types";
 
 function paginateItems<TItem>(
   items: TItem[],
@@ -45,14 +46,14 @@ function includesNormalizedValue(
 }
 
 export const tourismApiClient: ITourismApiClient = {
-  async listCidades(): Promise<ICidade[]> {
+  async listCidades(): Promise<ICity[]> {
     await mockDelay();
-    return cidadesMock.map(toCidadeEntity);
+    return cidadesMock;
   },
 
   async listEventosByCidade(
     params: IListByCidadeParams
-  ): Promise<ITourismApiListResponse<IEvento>> {
+  ): Promise<ITourismApiListResponse<IEvent>> {
     await mockDelay();
 
     const filteredItems = eventosMock.filter((item) => {
@@ -64,14 +65,14 @@ export const tourismApiClient: ITourismApiClient = {
       return matchesCidade && matchesBusca && matchesCategoria;
     });
 
-    const mappedItems: IEvento[] = filteredItems.map(toEventoEntity);
+    const mappedItems: IEvent[] = filteredItems.map(toEventoEntity).map(mapEventoToEvent);
 
     return paginateItems(mappedItems, params.page, params.limit);
   },
 
   async listPontosByCidade(
     params: IListByCidadeParams
-  ): Promise<ITourismApiListResponse<IPontoTuristico>> {
+  ): Promise<ITourismApiListResponse<ITouristPoint>> {
     await mockDelay();
 
     const filteredItems = pontosMock.filter((item) => {
@@ -83,14 +84,14 @@ export const tourismApiClient: ITourismApiClient = {
       return matchesCidade && matchesBusca && matchesCategoria;
     });
 
-    const mappedItems: IPontoTuristico[] = filteredItems.map(
+    const mappedItems: ITouristPoint[] = filteredItems.map(
       toPontoTuristicoEntity
-    );
+    ).map(mapPontoTuristicoToTouristPoint);
 
     return paginateItems(mappedItems, params.page, params.limit);
   },
 
-  async getEventoById(id: string): Promise<IEvento | null> {
+  async getEventoById(id: string): Promise<IEvent | null> {
     await mockDelay(180);
 
     const foundItem = eventosMock.find((item) => item.id === id);
@@ -99,10 +100,10 @@ export const tourismApiClient: ITourismApiClient = {
       return null;
     }
 
-    return toEventoEntity(foundItem);
+    return mapEventoToEvent(toEventoEntity(foundItem));
   },
 
-  async getPontoById(id: string): Promise<IPontoTuristico | null> {
+  async getPontoById(id: string): Promise<ITouristPoint | null> {
     await mockDelay(180);
 
     const foundItem = pontosMock.find((item) => item.id === id);
@@ -111,6 +112,6 @@ export const tourismApiClient: ITourismApiClient = {
       return null;
     }
 
-    return toPontoTuristicoEntity(foundItem);
+    return mapPontoTuristicoToTouristPoint(toPontoTuristicoEntity(foundItem));
   },
 };

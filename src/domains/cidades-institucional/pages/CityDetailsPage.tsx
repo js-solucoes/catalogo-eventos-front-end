@@ -112,7 +112,7 @@ export function CityDetailsPage(): ReactElement {
                 </Link>
 
                 <Link to={`/pontos-turisticos?cidade=${cidade.slug}`}>
-                  <Button variant="ghost" size="lg">
+                  <Button variant="primary" size="lg">
                     Ver pontos turísticos
                   </Button>
                 </Link>

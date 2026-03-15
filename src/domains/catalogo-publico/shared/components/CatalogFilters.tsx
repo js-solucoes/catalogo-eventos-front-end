@@ -1,13 +1,13 @@
 import type { ChangeEvent, ReactElement } from "react";
-import type { ICidade } from "@/entities/cidade/cidade.types";
 import type {
   ICatalogoFiltersConfig,
   ICatalogoFiltersValue,
 } from "../model/catalogo.filters";
+import { ICity } from "@/entities/city/city.types";
 
 interface ICatalogFiltersProps {
   cidadeSlug: string;
-  cidades: ICidade[];
+  cidades: ICity[];
   value: ICatalogoFiltersValue;
   config: ICatalogoFiltersConfig;
   onCidadeChange: (slug: string) => void;
@@ -57,9 +57,9 @@ export function CatalogFilters({
             onChange={handleCidadeChange}
             className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 outline-none transition focus:border-[var(--color-primary)]"
           >
-            {cidades.map((cidade: ICidade) => (
+            {cidades.map((cidade: ICity) => (
               <option key={cidade.id} value={cidade.slug}>
-                {cidade.nome}
+                {cidade.name}
               </option>
             ))}
           </select>

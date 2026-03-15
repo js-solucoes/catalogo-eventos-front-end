@@ -1,23 +1,31 @@
-import type { ICidadeApiResponse } from "./contracts/cidade.contracts";
+import type { ICityApiResponse } from "./contracts/city.contracts";
 import type { IEventoApiResponse } from "./contracts/evento.contracts";
 import type { IPontoTuristicoApiResponse } from "./contracts/pontoTuristico.contracts";
 
-export const cidadesMock: ICidadeApiResponse[] = [
+export const cidadesMock: ICityApiResponse[] = [
   {
     id: "dourados",
-    nome: "Dourados",
+    name: "Dourados",
     slug: "dourados",
-    uf: "MS",
-    descricao: "Centro regional com forte vida cultural e turística.",
-    imagem_principal: "/images/cidades/dourados.jpg",
+    state: "MS",
+    description: "Centro regional com forte vida cultural e turística.",
+    imageUrl: "/images/cidades/dourados.jpg",
+    summary: "",
+    published: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "itapora",
-    nome: "Itaporã",
+    name: "Itaporã",
     slug: "itapora",
-    uf: "MS",
-    descricao: "Cidade conectada ao território do Celeiro do MS.",
-    imagem_principal: "/images/cidades/itapora.jpg",
+    state: "MS",
+    description: "Cidade conectada ao território do Celeiro do MS.",
+    imageUrl: "/images/cidades/itapora.jpg",
+    summary: "",
+    published: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 

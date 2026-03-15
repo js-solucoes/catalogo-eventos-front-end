@@ -1,24 +1,24 @@
 import { useCallback, useMemo, type ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-import type { ICidade } from "@/entities/cidade/cidade.types";
-import { CIDADES_PUBLICAS } from "@/entities/cidade/cidades.constants";
+import { ICity } from "@/entities/city/city.types";
+import { CELEIRO_CITIES } from "@/domains/home-institucional/data/celeiroCities";
 
 const DEFAULT_CIDADE_SLUG = "dourados";
 
 interface IUseCatalogoCidadeResult {
   cidadeSlug: string;
   cidadeNome: string;
-  cidades: ICidade[];
+  cidades: ICity[];
   handleCidadeChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   setCidadeSlug: (slug: string) => void;
 }
 
 function isCidadeValida(slug: string): boolean {
-  return CIDADES_PUBLICAS.some((cidade: ICidade) => cidade.slug === slug);
+  return CELEIRO_CITIES.some((cidade: ICity) => cidade.slug === slug);
 }
 
-function getCidadeBySlug(slug: string): ICidade | undefined {
-  return CIDADES_PUBLICAS.find((cidade: ICidade) => cidade.slug === slug);
+function getCidadeBySlug(slug: string): ICity | undefined {
+  return CELEIRO_CITIES.find((cidade: ICity) => cidade.slug === slug);
 }
 
 export function useCatalogoCidade(): IUseCatalogoCidadeResult {
@@ -35,8 +35,8 @@ export function useCatalogoCidade(): IUseCatalogoCidadeResult {
   }, [searchParams]);
 
   const cidadeNome: string = useMemo(() => {
-    const cidade: ICidade | undefined = getCidadeBySlug(cidadeSlug);
-    return cidade?.nome ?? "Dourados";
+    const cidade: ICity | undefined = getCidadeBySlug(cidadeSlug);
+    return cidade?.name ?? "Dourados";
   }, [cidadeSlug]);
 
   const setCidadeSlug = useCallback(
@@ -59,7 +59,7 @@ export function useCatalogoCidade(): IUseCatalogoCidadeResult {
   return {
     cidadeSlug,
     cidadeNome,
-    cidades: CIDADES_PUBLICAS,
+    cidades: CELEIRO_CITIES,
     handleCidadeChange,
     setCidadeSlug,
   };
