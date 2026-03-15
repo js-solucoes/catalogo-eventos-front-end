@@ -11,7 +11,7 @@ export interface IHomeBannerBase {
 }
 
 export interface IHomeBanner extends IHomeBannerBase {
-  id: string;
+  id: number;
 }
 
 export type ICreateHomeBannerInput = Omit<IHomeBanner, "id">;
@@ -32,7 +32,7 @@ export interface IHomeHighlightBase {
 }
 
 export interface IHomeHighlight extends IHomeHighlightBase {
-  id: string;
+  id: number;
 }
 
 export type ICreateHomeHighlightInput = Omit<IHomeHighlight, "id">;

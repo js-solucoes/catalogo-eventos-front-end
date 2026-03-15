@@ -1,5 +1,5 @@
 interface ITouristPointBase {
-  cityId: string;
+  cityId: number;
   citySlug: string;
   name: string;
   description: string;
@@ -12,7 +12,7 @@ interface ITouristPointBase {
 }
 
 export interface ITouristPoint extends ITouristPointBase {
-  id: string;
+  id: number;
   createdAt: string;
   updatedAt: string;
 }

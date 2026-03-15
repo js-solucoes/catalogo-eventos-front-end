@@ -11,12 +11,12 @@ import { useEffect, useState, type ReactElement } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 interface IEventRouteParams {
-  id?: string;
+  id?: number;
 }
 
 export function EventoDetailsPage(): ReactElement {
   const params = useParams<keyof IEventRouteParams>();
-  const id: string | undefined = params.id;
+  const id: number | undefined = Number(params.id);
 
   const [event, setEvent] = useState<IEvent | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);

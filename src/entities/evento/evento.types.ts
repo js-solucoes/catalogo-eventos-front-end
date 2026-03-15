@@ -1,6 +1,6 @@
 export interface IEvento {
-  id: string;
-  cidadeId: string;
+  id: number;
+  cidadeId: number;
   cidadeSlug: string;
   nome: string;
   descricao: string;

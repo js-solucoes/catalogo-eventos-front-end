@@ -99,7 +99,7 @@ export const publicApiClient: IPublicApiClient = {
     return paginateItems(filteredItems, params.page, params.limit);
   },
 
-  async getPublishedEventById(id: string): Promise<IEvent | null> {
+  async getPublishedEventById(id: number): Promise<IEvent | null> {
     const event: IEvent | null = await adminApiClient.getEventById(id);
 
     if (!event || !event.published) {
@@ -107,6 +107,13 @@ export const publicApiClient: IPublicApiClient = {
     }
 
     return event;
+  },
+
+  async listPublishedEventByCityId(cityId: number): Promise<IEvent[] | null> {
+    const event: IEvent[] | null = await publicApiClient.listPublishedEventByCityId(cityId);
+
+    return event;
+    
   },
 
   async listPublishedTouristPoints(
@@ -136,7 +143,7 @@ export const publicApiClient: IPublicApiClient = {
   },
 
   async getPublishedTouristPointById(
-    id: string,
+    id: number,
   ): Promise<ITouristPoint | null> {
     const touristPoint: ITouristPoint | null =
       await adminApiClient.getTouristPointById(id);
@@ -146,6 +153,12 @@ export const publicApiClient: IPublicApiClient = {
     }
 
     return touristPoint;
+  },
+
+  async listPublishedTouristPointByCityId(cityId: number): Promise<ITouristPoint[] | null> {
+    const touristPoints: ITouristPoint[]|null = await publicApiClient.listPublishedTouristPointByCityId(cityId)
+
+    return touristPoints
   },
 
   async getInstitutionalContent(): Promise<IInstitutionalContent> {

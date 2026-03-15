@@ -86,7 +86,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: ISocialLink[] = getSocialLinksMock();
 
     const nextItem: ISocialLink = {
-      id: `social-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
     };
 
@@ -121,7 +121,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteSocialLink(id: string): Promise<void> {
+  async deleteSocialLink(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: ISocialLink[] = getSocialLinksMock();
@@ -137,7 +137,7 @@ export const adminApiClient: IAdminApiClient = {
     return getCitiesMock();
   },
 
-  async getCityById(id: string): Promise<ICity | null> {
+  async getCityById(id: number): Promise<ICity | null> {
     await adminMockDelay();
 
     const currentItems: ICity[] = getCitiesMock();
@@ -165,7 +165,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: ICity[] = getCitiesMock();
 
     const nextItem: ICity = {
-      id: `city-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -203,7 +203,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteCity(id: string): Promise<void> {
+  async deleteCity(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: ICity[] = getCitiesMock();
@@ -219,7 +219,7 @@ export const adminApiClient: IAdminApiClient = {
     return getEventsMock();
   },
 
-  async getEventById(id: string): Promise<IEvent | null> {
+  async getEventById(id: number): Promise<IEvent | null> {
     await adminMockDelay();
 
     const currentItems: IEvent[] = getEventsMock();
@@ -236,7 +236,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: IEvent[] = getEventsMock();
 
     const nextItem: IEvent = {
-      id: `event-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -274,7 +274,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteEvent(id: string): Promise<void> {
+  async deleteEvent(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: IEvent[] = getEventsMock();
@@ -290,7 +290,7 @@ export const adminApiClient: IAdminApiClient = {
     return getTouristPointsMock();
   },
 
-  async getTouristPointById(id: string): Promise<ITouristPoint | null> {
+  async getTouristPointById(id: number): Promise<ITouristPoint | null> {
     await adminMockDelay();
 
     const currentItems: ITouristPoint[] = getTouristPointsMock();
@@ -309,7 +309,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: ITouristPoint[] = getTouristPointsMock();
 
     const nextItem: ITouristPoint = {
-      id: `tourist-point-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -349,7 +349,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteTouristPoint(id: string): Promise<void> {
+  async deleteTouristPoint(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: ITouristPoint[] = getTouristPointsMock();
@@ -373,7 +373,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: IHomeBanner[] = getHomeBannersMock();
 
     const nextItem: IHomeBanner = {
-      id: `banner-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
     };
 
@@ -410,7 +410,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteHomeBanner(id: string): Promise<void> {
+  async deleteHomeBanner(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: IHomeBanner[] = getHomeBannersMock();
@@ -432,7 +432,7 @@ export const adminApiClient: IAdminApiClient = {
     const currentItems: IHomeHighlight[] = getHomeHighlightsMock();
 
     const nextItem: IHomeHighlight = {
-      id: `highlight-${crypto.randomUUID()}`,
+      id: Math.random(),
       ...input,
     };
 
@@ -469,7 +469,7 @@ export const adminApiClient: IAdminApiClient = {
     return nextItem;
   },
 
-  async deleteHomeHighlight(id: string): Promise<void> {
+  async deleteHomeHighlight(id: number): Promise<void> {
     await adminMockDelay();
 
     const currentItems: IHomeHighlight[] = getHomeHighlightsMock();

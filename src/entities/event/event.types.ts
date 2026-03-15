@@ -1,5 +1,5 @@
 interface IEventBase {
-  cityId: string;
+  cityId: number;
   citySlug: string;
   name: string;
   description: string;
@@ -14,15 +14,11 @@ interface IEventBase {
 }
 
 export interface IEvent extends IEventBase {
-  id: string;
+  id: number;
   createdAt: string;
   updatedAt: string;
 }
 
-export type ICreateEventInput = Omit<
-  IEvent,
-  "id" | "createdAt" | "updatedAt"
->;
+export type ICreateEventInput = Omit<IEvent, "id" | "createdAt" | "updatedAt">;
 
-export type IUpdateEventInput = Partial<ICreateEventInput> &
-  Pick<IEvent, "id">;
+export type IUpdateEventInput = Partial<ICreateEventInput> & Pick<IEvent, "id">;

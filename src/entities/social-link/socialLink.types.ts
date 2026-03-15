@@ -14,7 +14,7 @@ export interface ISocialLinkBase {
 }
 
 export interface ISocialLink extends ISocialLinkBase {
-  id: string;
+  id: number;
 }
 
 export type ICreateSocialLinkInput = Omit<ISocialLink, "id">;

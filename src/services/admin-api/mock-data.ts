@@ -41,7 +41,7 @@ let institutionalContentMock: IInstitutionalContent = {
 
 let socialLinksMock: ISocialLink[] = [
   {
-    id: "social-1",
+    id: 1,
     platform: "instagram",
     label: "Instagram",
     url: "https://instagram.com",
@@ -49,7 +49,7 @@ let socialLinksMock: ISocialLink[] = [
     order: 1,
   },
   {
-    id: "social-2",
+    id: 2,
     platform: "facebook",
     label: "Facebook",
     url: "https://facebook.com",
@@ -57,7 +57,7 @@ let socialLinksMock: ISocialLink[] = [
     order: 2,
   },
   {
-    id: "social-3",
+    id: 3,
     platform: "youtube",
     label: "YouTube",
     url: "https://youtube.com",
@@ -68,7 +68,7 @@ let socialLinksMock: ISocialLink[] = [
 
 let citiesMock: ICity[] = [
   {
-    id: "city-dourados",
+    id: 1,
     name: "Dourados",
     slug: "dourados",
     state: "MS",
@@ -82,7 +82,7 @@ let citiesMock: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "city-itapora",
+    id: 2,
     name: "Itaporã",
     slug: "itapora",
     state: "MS",
@@ -95,7 +95,7 @@ let citiesMock: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "city-caarapo",
+    id: 3,
     name: "Caarapó",
     slug: "caarapo",
     state: "MS",
@@ -112,8 +112,8 @@ let citiesMock: ICity[] = [
 
 let eventsMock: IEvent[] = [
   {
-    id: "event-1",
-    cityId: "city-dourados",
+    id: 1,
+    cityId: 1,
     citySlug: "dourados",
     name: "Festival Gastronômico de Dourados",
     description:
@@ -130,8 +130,8 @@ let eventsMock: IEvent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "event-2",
-    cityId: "city-itapora",
+    id: 2,
+    cityId: 2,
     citySlug: "itapora",
     name: "Feira Cultural de Itaporã",
     description: "Evento cultural com artesanato, música e gastronomia local.",
@@ -150,8 +150,8 @@ let eventsMock: IEvent[] = [
 
 let touristPointsMock: ITouristPoint[] = [
   {
-    id: "tourist-point-1",
-    cityId: "city-dourados",
+    id: 1,
+    cityId: 1,
     citySlug: "dourados",
     name: "Parque Antenor Martins",
     description:
@@ -166,8 +166,8 @@ let touristPointsMock: ITouristPoint[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "tourist-point-2",
-    cityId: "city-itapora",
+    id: 2,
+    cityId: 2,
     citySlug: "itapora",
     name: "Praça Central de Itaporã",
     description:
@@ -185,7 +185,7 @@ let touristPointsMock: ITouristPoint[] = [
 
 let homeBannersMock: IHomeBanner[] = [
   {
-    id: "banner-1",
+    id: 1,
     title: "Descubra o Celeiro do MS",
     subtitle: "Cultura, turismo e experiências regionais em destaque.",
     imageUrl: "/images/banners/banner-home-1.jpg",
@@ -198,7 +198,7 @@ let homeBannersMock: IHomeBanner[] = [
 
 let homeHighlightsMock: IHomeHighlight[] = [
   {
-    id: "highlight-1",
+    id: 1,
     type: "event",
     referenceId: "event-1",
     title: "Festival Gastronômico de Dourados",
@@ -210,7 +210,7 @@ let homeHighlightsMock: IHomeHighlight[] = [
     order: 1,
   },
   {
-    id: "highlight-2",
+    id: 2,
     type: "tourist-point",
     referenceId: "tourist-point-1",
     title: "Parque Antenor Martins",

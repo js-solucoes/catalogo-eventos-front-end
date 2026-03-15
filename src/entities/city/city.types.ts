@@ -9,7 +9,7 @@ export interface ICityBase {
 }
 
 export interface ICity extends ICityBase {
-  id: string;
+  id: number;
   createdAt: string;
   updatedAt: string;
 }

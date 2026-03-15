@@ -11,12 +11,12 @@ import { useEffect, useState, type ReactElement } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 interface ITouristPointRouteParams {
-  id?: string;
+  id?: number;
 }
 
 export function PontoTuristicoDetailsPage(): ReactElement {
   const params = useParams<keyof ITouristPointRouteParams>();
-  const id: string | undefined = params.id;
+  const id: number | undefined = Number(params.id);
 
   const [touristPoint, setTouristPoint] = useState<ITouristPoint | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
