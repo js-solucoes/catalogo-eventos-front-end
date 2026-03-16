@@ -1,9 +1,9 @@
 export type CatalogoItemKind = "evento" | "ponto-turistico";
 
 export interface ICatalogoItem {
-  id: string;
+  id: number;
   kind: CatalogoItemKind;
-  cidadeId: string;
+  cidadeId: number;
   cidadeSlug: string;
   titulo: string;
   descricao: string;

@@ -1,25 +1,33 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { CatalogFilters } from "../components/CatalogFilters";
-import type { ICidade } from "@/entities/cidade/cidade.types";
 import type {
   ICatalogoFiltersConfig,
   ICatalogoFiltersValue,
 } from "../model/catalogo.filters";
+import { ICity } from "@/entities/city/city.types";
 
 describe("CatalogFilters", () => {
-  const cidades: ICidade[] = [
+  const cidades: ICity[] = [
     {
       id: "dourados",
-      nome: "Dourados",
+      name: "Dourados",
       slug: "dourados",
-      uf: "MS",
+      state: "MS",
+      summary: "",
+      published: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     },
     {
       id: "itapora",
-      nome: "Itaporã",
+      name: "Itaporã",
       slug: "itapora",
-      uf: "MS",
+      state: "MS",
+      summary: "",
+      published: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     },
   ];
 
@@ -45,7 +53,7 @@ describe("CatalogFilters", () => {
         config={config}
         onCidadeChange={vi.fn()}
         onChange={vi.fn()}
-      />
+      />,
     );
 
     expect(screen.getByLabelText("Cidade")).toBeInTheDocument();
@@ -64,7 +72,7 @@ describe("CatalogFilters", () => {
         config={config}
         onCidadeChange={onCidadeChange}
         onChange={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(screen.getByLabelText("Cidade"), {
@@ -86,7 +94,7 @@ describe("CatalogFilters", () => {
         config={config}
         onCidadeChange={vi.fn()}
         onChange={onChange}
-      />
+      />,
     );
 
     fireEvent.change(screen.getByLabelText("Buscar"), {
@@ -111,7 +119,7 @@ describe("CatalogFilters", () => {
         config={config}
         onCidadeChange={vi.fn()}
         onChange={onChange}
-      />
+      />,
     );
 
     fireEvent.change(screen.getByLabelText("Categoria"), {
@@ -134,11 +142,9 @@ describe("CatalogFilters", () => {
         config={config}
         onCidadeChange={vi.fn()}
         onChange={vi.fn()}
-      />
+      />,
     );
 
-    expect(
-      screen.getByPlaceholderText("Busque por nome")
-    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Busque por nome")).toBeInTheDocument();
   });
 });
