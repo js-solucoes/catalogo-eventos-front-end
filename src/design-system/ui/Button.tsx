@@ -1,5 +1,5 @@
-import type { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
 import { cn } from "@/design-system/utils/cn";
+import type { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "accent";
 type ButtonSize = "sm" | "md" | "lg";
@@ -48,7 +48,7 @@ export function Button({
       type={type}
       disabled={isDisabled}
       className={cn(
-        "inline-flex items-center justify-center rounded-2xl font-semibold transition outline-none disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center justify-center rounded-2xl font-semibold transition outline-none disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer",
         variantClasses[variant],
         sizeClasses[size],
         fullWidth && "w-full",

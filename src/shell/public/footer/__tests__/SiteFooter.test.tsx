@@ -17,7 +17,7 @@ describe("SiteFooter", () => {
 
     vi.mocked(publicApiClient.listActiveSocialLinks).mockResolvedValue([
       {
-        id: "social-1",
+        id: 1,
         platform: "instagram",
         label: "Instagram",
         url: "https://instagram.com",
@@ -25,7 +25,7 @@ describe("SiteFooter", () => {
         order: 1,
       },
       {
-        id: "social-2",
+        id: 2,
         platform: "facebook",
         label: "Facebook",
         url: "https://facebook.com",
@@ -33,7 +33,7 @@ describe("SiteFooter", () => {
         order: 2,
       },
       {
-        id: "social-3",
+        id: 3,
         platform: "youtube",
         label: "YouTube",
         url: "https://youtube.com",
@@ -78,23 +78,50 @@ describe("SiteFooter", () => {
     );
 
     await waitFor(async () => {
-      expect(await screen.findByRole("link", { name: "Instagram" })).toHaveAttribute(
-        "href",
-        "https://instagram.com",
-      );
+      expect(
+        await screen.findByRole("link", { name: "Instagram" }),
+      ).toHaveAttribute("href", "https://instagram.com");
     });
 
     await waitFor(async () => {
-      expect(await screen.findByRole("link", { name: "Facebook" })).toHaveAttribute(
-        "href",
-        "https://facebook.com",
-      );
+      expect(
+        await screen.findByRole("link", { name: "Facebook" }),
+      ).toHaveAttribute("href", "https://facebook.com");
     });
     await waitFor(async () => {
-      expect(await screen.findByRole("link", { name: "YouTube" })).toHaveAttribute(
-        "href",
-        "https://youtube.com",
-      );
+      expect(
+        await screen.findByRole("link", { name: "YouTube" }),
+      ).toHaveAttribute("href", "https://youtube.com");
     });
+  });
+
+  it("deve renderizar mensagem quando não houver mídias sociais", async () => {
+    vi.mocked(publicApiClient.listActiveSocialLinks).mockResolvedValue([]);
+
+    render(
+      <MemoryRouter>
+        <SiteFooter />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByText("Nenhuma mídia social disponível."),
+    ).toBeInTheDocument();
+  });
+
+  it("deve renderizar fallback quando a carga das mídias sociais falhar", async () => {
+    vi.mocked(publicApiClient.listActiveSocialLinks).mockRejectedValue(
+      new Error("erro"),
+    );
+
+    render(
+      <MemoryRouter>
+        <SiteFooter />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByText("Nenhuma mídia social disponível."),
+    ).toBeInTheDocument();
   });
 });
