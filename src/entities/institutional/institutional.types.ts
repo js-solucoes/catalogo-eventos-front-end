@@ -14,7 +14,7 @@ interface IInstitutionalContentFields {
 }
 
 interface IInstitutionalContentMeta {
-  id: string;
+  id: number;
   updatedAt: string;
 }
 

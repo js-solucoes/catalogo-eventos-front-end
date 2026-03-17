@@ -5,7 +5,7 @@ import { publicApiClient } from "@/services/public-api/client";
 import { IHomeHighlight } from "@/entities/home-content/homeContent.types";
 
 interface IHomeHighlightItem {
-  id: string;
+  id: number;
   kind: "evento" | "ponto-turistico" | "custom";
   titulo: string;
   descricao: string;

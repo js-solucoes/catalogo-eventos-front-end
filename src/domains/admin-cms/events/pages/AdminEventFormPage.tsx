@@ -17,11 +17,11 @@ import type {
 import { adminApiClient } from "@/services/admin-api/client";
 
 interface IEventFormRouteParams {
-  id?: string;
+  id?: number;
 }
 
 interface IEventFormState {
-  cityId: string;
+  cityId: number;
   citySlug: string;
   name: string;
   description: string;
@@ -37,7 +37,7 @@ interface IEventFormState {
 
 function buildInitialFormState(): IEventFormState {
   return {
-    cityId: "",
+    cityId: 0,
     citySlug: "",
     name: "",
     description: "",
@@ -72,7 +72,7 @@ function mapEventToFormState(event: IEvent): IEventFormState {
 export function AdminEventFormPage(): ReactElement {
   const navigate = useNavigate();
   const params = useParams<keyof IEventFormRouteParams>();
-  const eventId: string | undefined = params.id;
+  const eventId: number | undefined = Number(params.id);
 
   const isEditMode: boolean = Boolean(eventId);
 
@@ -165,7 +165,7 @@ export function AdminEventFormPage(): ReactElement {
 
       if (name === "cityId") {
         const selectedCity: ICity | undefined = cities.find(
-          (city: ICity) => city.id === value
+          (city: ICity) => city.id === Number(value)
         );
 
         nextState.citySlug = selectedCity?.slug ?? "";

@@ -2,7 +2,7 @@ import type { ICity } from "@/entities/city/city.types";
 
 export const CELEIRO_CITIES: ICity[] = [
   {
-    id: "dourados",
+    id: 1,
     name: "Dourados",
     slug: "dourados",
     state: "MS",
@@ -12,7 +12,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "itapora",
+    id: 2,
     name: "Itaporã",
     slug: "itapora",
     state: "MS",
@@ -22,7 +22,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "caarapo",
+    id: 2,
     name: "Caarapó",
     slug: "caarapo",
     state: "MS",
@@ -32,7 +32,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "fatima-do-sul",
+    id: 3,
     name: "Fátima do Sul",
     slug: "fatima-do-sul",
     state: "MS",
@@ -42,7 +42,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "jatei",
+    id: 4,
     name: "Jateí",
     slug: "jatei",
     state: "MS",
@@ -52,7 +52,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "deodapolis",
+    id: 5,
     name: "Deodápolis",
     slug: "deodapolis",
     state: "MS",
@@ -62,7 +62,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "douradina",
+    id: 6,
     name: "Douradina",
     slug: "douradina",
     state: "MS",
@@ -72,7 +72,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "vicentina",
+    id: 7,
     name: "Vicentina",
     slug: "vicentina",
     state: "MS",
@@ -82,7 +82,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "juti",
+    id: 8,
     name: "Juti",
     slug: "juti",
     state: "MS",
@@ -92,7 +92,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "gloria-de-dourados",
+    id: 9,
     name: "Glória de Dourados",
     slug: "gloria-de-dourados",
     state: "MS",
@@ -102,7 +102,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "maracaju",
+    id: 10,
     name: "Maracaju",
     slug: "maracaju",
     state: "MS",
@@ -112,7 +112,7 @@ export const CELEIRO_CITIES: ICity[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: "rio-brilhante",
+    id: 11,
     name: "Rio Brilhante",
     slug: "rio-brilhante",
     state: "MS",

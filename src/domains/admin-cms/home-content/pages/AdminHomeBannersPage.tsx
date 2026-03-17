@@ -128,7 +128,7 @@ export function AdminHomeBannersPage(): ReactElement {
     }
   }
 
-  async function handleDelete(id: string): Promise<void> {
+  async function handleDelete(id: number): Promise<void> {
     try {
       setError("");
       setSuccessMessage("");

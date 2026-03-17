@@ -28,10 +28,11 @@ export function AuthProvider({
     }
 
     const nextUser: IAdminUser = {
-      id: "admin-1",
+      id: 1,
       name: "Administrador",
       email,
       role: "admin",
+      token: "user-123-admin"
     };
 
     setUser(nextUser);

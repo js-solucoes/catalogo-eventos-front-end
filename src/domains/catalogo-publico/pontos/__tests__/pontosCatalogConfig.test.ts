@@ -18,8 +18,8 @@ describe("fetchPontosCatalogo", () => {
     vi.mocked(publicApiClient.listPublishedTouristPoints).mockResolvedValue({
       items: [
         {
-          id: "pto-1",
-          cityId: "city-dourados",
+          id: 1,
+          cityId: 2,
           citySlug: "dourados",
           name: "Parque Antenor Martins",
           description: "Área verde com lazer",

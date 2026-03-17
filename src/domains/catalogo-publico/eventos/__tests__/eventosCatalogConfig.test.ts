@@ -18,8 +18,8 @@ describe("fetchEventosCatalogo", () => {
     vi.mocked(publicApiClient.listPublishedEvents).mockResolvedValue({
       items: [
         {
-          id: "evt-1",
-          cityId: "city-dourados",
+          id: 1,
+          cityId: 1,
           citySlug: "dourados",
           name: "Festival Gastronômico",
           description: "Sabores regionais",
@@ -49,9 +49,9 @@ describe("fetchEventosCatalogo", () => {
     expect(result).toEqual({
       items: [
         {
-          id: "evt-1",
+          id: 1,
           kind: "evento",
-          cidadeId: "city-dourados",
+          cidadeId: 1,
           cidadeSlug: "dourados",
           titulo: "Festival Gastronômico",
           descricao: "Sabores regionais",

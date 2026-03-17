@@ -18,7 +18,7 @@ describe("AboutPage", () => {
 
     vi.mocked(useInstitutionalContent).mockReturnValue({
       content: {
-        id: "institutional-content-1",
+        id: 1,
         aboutTitle: "Sobre o Celeiro do MS",
         aboutText: "Texto sobre o portal.",
         whoWeAreTitle: "Quem somos",

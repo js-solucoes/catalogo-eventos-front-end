@@ -25,8 +25,8 @@ describe("PontosTuristicosPage", () => {
       cidadeSlug: "dourados",
       cidadeNome: "Dourados",
       cidades: [
-        { id: "dourados", nome: "Dourados", slug: "dourados", uf: "MS" },
-        { id: "itapora", nome: "Itaporã", slug: "itapora", uf: "MS" },
+        { id: 1, name: "Dourados", slug: "dourados", state: "MS", published: true, summary: "", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+        { id: 2, name: "Itaporã", slug: "itapora", state: "MS", published: true, summary: "", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
       ],
       handleCidadeChange: vi.fn(),
       setCidadeSlug: vi.fn(),
@@ -65,9 +65,9 @@ describe("PontosTuristicosPage", () => {
       data: {
         items: [
           {
-            id: "pto-1",
+            id: 1,
             kind: "ponto-turistico",
-            cidadeId: "dourados",
+            cidadeId: 1,
             cidadeSlug: "dourados",
             titulo: "Parque Antenor Martins",
             descricao: "Área verde com espaço de lazer.",
@@ -163,9 +163,9 @@ describe("PontosTuristicosPage", () => {
       data: {
         items: [
           {
-            id: "pto-1",
+            id: 1,
             kind: "ponto-turistico",
-            cidadeId: "dourados",
+            cidadeId: 1,
             cidadeSlug: "dourados",
             titulo: "Parque Antenor Martins",
             descricao: "Área verde com espaço de lazer.",
