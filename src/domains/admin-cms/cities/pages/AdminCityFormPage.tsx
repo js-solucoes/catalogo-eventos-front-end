@@ -16,7 +16,7 @@ import type {
 import { adminApiClient } from "@/services/admin-api/client";
 
 interface ICityFormRouteParams {
-  id?: string;
+  id?: number;
 }
 
 interface ICityFormState {
@@ -65,7 +65,7 @@ function slugifyCityName(value: string): string {
 export function AdminCityFormPage(): ReactElement {
   const navigate = useNavigate();
   const params = useParams<keyof ICityFormRouteParams>();
-  const cityId: string | undefined = params.id;
+  const cityId: number | undefined = Number(params.id);
 
   const isEditMode: boolean = Boolean(cityId);
 

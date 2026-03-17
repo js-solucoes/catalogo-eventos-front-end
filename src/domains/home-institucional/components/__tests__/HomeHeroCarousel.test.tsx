@@ -32,7 +32,7 @@ describe("HomeHeroCarousel", () => {
       banners: [],
       highlights: [
         {
-          id: "home-highlight-1",
+          id: 1,
           type: "event",
           referenceId: "event-1",
           title: "Festival Gastronômico de Dourados",
@@ -44,7 +44,7 @@ describe("HomeHeroCarousel", () => {
           order: 1,
         },
         {
-          id: "home-highlight-2",
+          id: 2,
           type: "tourist-point",
           referenceId: "tourist-point-1",
           title: "Parque Antenor Martins",
@@ -56,7 +56,7 @@ describe("HomeHeroCarousel", () => {
           order: 2,
         },
         {
-          id: "home-highlight-3",
+          id: 3,
           type: "custom",
           title: "Mostra de Música Regional",
           description: "Programação especial.",

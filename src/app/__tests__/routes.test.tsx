@@ -136,7 +136,7 @@ describe("AppRoutes", () => {
 
     vi.mocked(publicApiClient.listActiveSocialLinks).mockResolvedValue([
       {
-        id: "social-1",
+        id: 1,
         platform: "instagram",
         label: "Instagram",
         url: "https://instagram.com",
@@ -146,7 +146,7 @@ describe("AppRoutes", () => {
     ]);
 
     vi.mocked(publicApiClient.getInstitutionalContent).mockResolvedValue({
-      id: "institutional-content-1",
+      id: 1,
       aboutTitle: "Sobre o Celeiro do MS",
       aboutText: "Texto sobre o portal.",
       whoWeAreTitle: "Quem somos",

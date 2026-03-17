@@ -10,7 +10,7 @@ import { ICity } from "@/entities/city/city.types";
 describe("CatalogFilters", () => {
   const cidades: ICity[] = [
     {
-      id: "dourados",
+      id: 1,
       name: "Dourados",
       slug: "dourados",
       state: "MS",
@@ -20,7 +20,7 @@ describe("CatalogFilters", () => {
       updatedAt: new Date().toISOString(),
     },
     {
-      id: "itapora",
+      id: 2,
       name: "Itaporã",
       slug: "itapora",
       state: "MS",

@@ -17,11 +17,11 @@ import type {
 import { adminApiClient } from "@/services/admin-api/client";
 
 interface ITouristPointFormRouteParams {
-  id?: string;
+  id?: number;
 }
 
 interface ITouristPointFormState {
-  cityId: string;
+  cityId: number;
   citySlug: string;
   name: string;
   description: string;
@@ -35,7 +35,7 @@ interface ITouristPointFormState {
 
 function buildInitialFormState(): ITouristPointFormState {
   return {
-    cityId: "",
+    cityId: 0,
     citySlug: "",
     name: "",
     description: "",
@@ -68,7 +68,7 @@ function mapTouristPointToFormState(
 export function AdminTouristPointFormPage(): ReactElement {
   const navigate = useNavigate();
   const params = useParams<keyof ITouristPointFormRouteParams>();
-  const touristPointId: string | undefined = params.id;
+  const touristPointId: number | undefined = Number(params.id);
 
   const isEditMode: boolean = Boolean(touristPointId);
 
@@ -163,7 +163,7 @@ export function AdminTouristPointFormPage(): ReactElement {
 
       if (name === "cityId") {
         const selectedCity: ICity | undefined = cities.find(
-          (city: ICity) => city.id === value
+          (city: ICity) => city.id === Number(value)
         );
 
         nextState.citySlug = selectedCity?.slug ?? "";

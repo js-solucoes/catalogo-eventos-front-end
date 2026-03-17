@@ -29,7 +29,7 @@ describe("CityDetailsPage", () => {
 
   it("deve renderizar os dados da cidade quando o slug for válido", async () => {
     vi.mocked(publicApiClient.getPublishedCityBySlug).mockResolvedValue({
-      id: "city-dourados",
+      id: 1,
       name: "Dourados",
       slug: "dourados",
       state: "MS",
@@ -49,7 +49,7 @@ describe("CityDetailsPage", () => {
 
   it("deve renderizar os blocos institucionais da cidade", async () => {
     vi.mocked(publicApiClient.getPublishedCityBySlug).mockResolvedValue({
-      id: "city-dourados",
+      id: 1,
       name: "Dourados",
       slug: "dourados",
       state: "MS",
@@ -70,7 +70,7 @@ describe("CityDetailsPage", () => {
 
   it("deve renderizar os links para eventos e pontos turísticos da cidade", async () => {
     vi.mocked(publicApiClient.getPublishedCityBySlug).mockResolvedValue({
-      id: "city-dourados",
+      id: 1,
       name: "Dourados",
       slug: "dourados",
       state: "MS",

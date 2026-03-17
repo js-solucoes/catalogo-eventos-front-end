@@ -9,7 +9,7 @@ import type {
 } from "@/entities/home-content/homeContent.types";
 
 let institutionalContentMock: IInstitutionalContent = {
-  id: "institutional-content-1",
+  id: 1,
 
   aboutTitle: "Sobre o Celeiro do MS",
   aboutText:
