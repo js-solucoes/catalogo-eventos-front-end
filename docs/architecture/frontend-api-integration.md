@@ -5,6 +5,13 @@
 - A área de **apresentação** (páginas, hooks de domínio que orquestram telas) consome dados através dos **clientes** em `src/services/public-api` e `src/services/admin-api`, ou de abstrações que estes expõem.
 - **Não** introduzir chamadas HTTP ad hoc (Axios/fetch) dentro de `src/domains/*` salvo exceções documentadas abaixo.
 
+## Mocks até o BFF integrar com a API
+
+- `VITE_USE_API_MOCKS=true` (default em `.env.development` versionado) força **clientes in-memory** para público e admin, **mesmo** com `VITE_PUBLIC_BFF_BASE_URL` / `VITE_ADMIN_BFF_BASE_URL` definidos.
+- Login admin: com mocks forçados, usa o fluxo **mock** de desenvolvimento (não chama `loginWithPassword` no BFF). Ver `resolveAdminUsesRealHttp` em `adminBffConfig.ts`.
+- Para testar contra o BFF real: em `.env.local` use `VITE_USE_API_MOCKS=false` e a URL HTTPS do BFF.
+- **Produção:** definir `VITE_USE_API_MOCKS=false` (ou omitir) e injetar a URL do BFF no build; nunca publicar com mocks forçados.
+
 ## Exceções (importar de `services` ou nativo com critério)
 
 - **Auth / sessão admin**: tokens e persistência em `src/domains/admin-cms/auth/*` permanecem no domínio; o refresh e login usam `adminAuth.api` na camada `services`.

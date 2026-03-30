@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { describe, expect, it } from "vitest";
 import { ApiError, toApiError } from "../apiError";
 
@@ -24,7 +24,7 @@ describe("toApiError", () => {
       data: { message: "Campo inválido" },
       headers: { "x-request-id": "req-1" },
       statusText: "Unprocessable",
-      config: {} as AxiosError["config"],
+      config: {} as InternalAxiosRequestConfig,
     };
     const out = toApiError(err);
     expect(out).toBeInstanceOf(ApiError);
@@ -40,7 +40,7 @@ describe("toApiError", () => {
       data: {},
       headers: {},
       statusText: "",
-      config: {} as AxiosError["config"],
+      config: {} as InternalAxiosRequestConfig,
     };
     const out = toApiError(err, "Serviço indisponível.");
     expect(out.message).toBe("timeout");
